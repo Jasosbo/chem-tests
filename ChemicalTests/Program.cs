@@ -16,13 +16,29 @@ namespace ChemicalTests
                 "To enter manualy enter 1 or to randonmly generate enter 2"
                 );
 
-           
-            
+
+            TestChemical();
 
 
         }
 
-        
+        static void TestChemical()
+        {
+            float germNum = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
+
+
+
+            if (germNum == 1)
+            {
+                Console.WriteLine("Enter amount of live germs in sample\n");
+            }
+            else
+            {
+                Random rnd = new Random();
+                float randflo = rnd.Next();
+                Console.WriteLine($"{randflo}");
+            }
+        }
 
 
 
