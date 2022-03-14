@@ -26,27 +26,11 @@ namespace ChemicalTests
         static void TestChemical()
         {
             //first live germ sample
-            Console.WriteLine("Entering live germ sample:\n" +
-                "To enter manualy enter 1 or to randonmly generate enter 2"
-                );
 
 
-            float germNum = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
+            Console.WriteLine("Enter amount of live germs in sample\n");
+            float liveGerm = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
 
-
-
-            if (germNum == 1)
-            {
-                Console.WriteLine("Enter amount of live germs in sample\n");
-                float liveGerm = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
-
-            }
-            else
-            {
-                Random rnd = new Random();
-                float liveGerm = rnd.Next();
-                Console.WriteLine($"{liveGerm}");
-            }
 
 
             Console.WriteLine("\nPlease select the chemical being tested:\n\n" +
@@ -65,7 +49,11 @@ namespace ChemicalTests
 
             float remGerms = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
 
+            //efficency rating
+            float efficRate = (liveGerm - remGerms) / 30;
 
+
+            Console.WriteLine($"\n{efficRate} ");
 
 
         }
