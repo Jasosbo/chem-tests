@@ -25,35 +25,43 @@ namespace ChemicalTests
 
         static void TestChemical()
         {
-            //first live germ sample
-
-
-            Console.WriteLine("Enter amount of live germs in sample\n");
-            float liveGerm = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
-
-
 
             Console.WriteLine("\nPlease select the chemical being tested:\n\n" +
-                "1. Chlorine\n" +
-                "2. Formaldehyde\n" +
-                "3. Hydrogen Peroxide\n" +
-                "4. Ethanol\n" +
-                "5. Peracetic Acid\n"
-                );
+                   "1. Chlorine\n" +
+                   "2. Formaldehyde\n" +
+                   "3. Hydrogen Peroxide\n" +
+                   "4. Ethanol\n" +
+                   "5. Peracetic Acid\n"
+                   );
 
             int chemchoice = Convert.ToInt32(Console.ReadLine());
+ 
+            for (int i = 1; i < 6; i++) 
+            {
 
-            
-            //follow up live germ sample
-            Console.WriteLine("\nPlease enter remaining live germs in sample");
+                //first live germ sample
 
-            float remGerms = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
+                Console.WriteLine($"\nEnter amount of live germs in sample : Test {i}\n");
+                float liveGerm = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
 
-            //efficency rating
-            float efficRate = (liveGerm - remGerms) / 30;
+                Console.WriteLine("-------------------------------------------------------------------------------\n"+
+                    "~~~~ Please wait 30 minutes before checking remaining live germs in sample ~~~\n" +
+                    "-------------------------------------------------------------------------------");
+
+                //follow up live germ sample
+                Console.WriteLine("\nPlease enter remaining live germs in sample");
+
+                float remGerms = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
+
+                //efficency rating
+                float efficRate = (liveGerm - remGerms) / 30;
 
 
-            Console.WriteLine($"\n{efficRate} ");
+                Console.WriteLine($"\nThe efficency rating for ---- is {efficRate} ");
+
+            }
+
+           
 
 
         }
