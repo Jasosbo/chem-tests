@@ -27,7 +27,7 @@ namespace ChemicalTests
 
             //welcome message
             Console.WriteLine("---------------------------------------------------------------\n" +
-                "Welcome to chemical testing!\n" +
+                "Welcome to chemical testing for HI - Jean Cleaning!\n" +
                 "You enter a sample of germs and each chemical.\n" +
                 "The tests will show an efficency rating for each sample you enter.\n" +
                 "---------------------------------------------------------------\n\n"
@@ -45,7 +45,7 @@ namespace ChemicalTests
                 }
                 else if (menuPick == 2)
                 {
-                    Console.WriteLine("Thank you for trying HI-Jean Cleaning :)\n");
+                    Console.WriteLine("Thank you for trying HI-Jean Cleaning\n");
                     flag = false;
                 }
                 else
