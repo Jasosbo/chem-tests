@@ -15,6 +15,7 @@ namespace ChemicalTests
         static List<float> chemRating = new List<float>();
         static List<int> chosenChemicals = new List<int>();
 
+
         //methods
 
         //main process/when run
@@ -57,128 +58,190 @@ namespace ChemicalTests
 
             }
 
+            //sorting chemRating and CHEMICALS lists in order
 
-        }
-
-        //additonal methods
-
-        //check to see chemical has not been tested before
-        static int CheckChemical()
-        {
-            while (true)
+            for (int leftPointer = 0; leftPointer < chemRating.Count - 1; leftPointer++)
             {
+                for (int rightPointer = leftPointer + 1; rightPointer < chemRating.Count; rightPointer++)
+                {
+                    //Swopping logic
+                    if (chemRating[leftPointer] < chemRating[rightPointer])
+                    {
+                        float tempRATE = chemRating[leftPointer];
+                        chemRating[leftPointer] = chemRating[rightPointer];
+                        chemRating[rightPointer] = tempRATE;
+                        int tempCHEM = chosenChemicals[leftPointer];
+                        chosenChemicals[leftPointer] = chosenChemicals[rightPointer];
+                        chosenChemicals[rightPointer] = tempCHEM;
 
-                Console.WriteLine("\nPlease select the chemical being tested:\n\n" +
+                    }
+                }
+            }
+
+            //Ordered List top chems
+
+
+            string top3Chem = "----- Top Rated Chemicals -----\n";
+
+            int numLoop;
+
+            if (chosenChemicals.Count >= 3)
+            {
+                numLoop = 3;
+            }
+            else
+            {
+                numLoop = chosenChemicals.Count;
+            }
+
+            for(int chemIndex = 0; chemIndex < numLoop; chemIndex++)
+            {
+                top3Chem+= chemIndex + 1 + "." + " " + CHEMICALS[chosenChemicals[chemIndex]] + "  " + chemRating[chemIndex] +"\n";
+                
+            }
+
+            Console.WriteLine(top3Chem);
+
+            //worst chems
+
+            string worst3Chem = "----- Worst Rated Chemicals -----\n";
+
+            int numbLoop;
+            int worstChemIndex = chosenChemicals.Count - 1;
+
+            if (chosenChemicals.Count >= 3)
+            {
+                numbLoop = 3;
+            }
+            else
+            {
+                numbLoop = chosenChemicals.Count;
+            }
+
+            for (int loop = 0; loop < numbLoop; loop++)
+            {
+                worst3Chem += worstChemIndex + 1 + "." + " " + CHEMICALS[chosenChemicals[worstChemIndex]] + "  " + chemRating[worstChemIndex] + "\n";
+                worstChemIndex--;
+            }
+            Console.WriteLine(worst3Chem);
+        }  
+
+
+
+            //additonal methods
+
+            //check to see chemical has not been tested before
+            static int CheckChemical()
+            {
+                while (true)
+                {
+
+                    int chemChoice = CheckInt("\nPlease select the chemical being tested:\n\n" +
                        $"1. {CHEMICALS[0]}\n" +
                        $"2. {CHEMICALS[1]}\n" +
                        $"3. {CHEMICALS[2]}\n" +
                        $"4. {CHEMICALS[3]}\n" +
-                       $"5. {CHEMICALS[4]}\n"
-                       );
-
-                int chemChoice = Convert.ToInt32(Console.ReadLine());
+                       $"5. {CHEMICALS[4]}\n", 1, 5);
 
 
-                if (chosenChemicals.Contains(chemChoice))
-                {
-                    Console.WriteLine("ERROR: chemical has already been tested");
-
-                }
-                else
-                {
-                    return chemChoice;
-                }
-            }
-
-        }
-
-
-
-        //calculates the efficency of chemical
-
-        static void TestChemical()
-        {
-
-            chosenChemicals.Add(CheckChemical());
-
-            float sumEffic = 0;
-
-            for (int i = 1; i < 6; i++)
-            {
-
-                //first live germ sample
-
-                Console.WriteLine($"\nEnter amount of live germs in sample : Test {i}\n");
-                float liveGerm = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
-
-                Console.WriteLine("-------------------------------------------------------------------------------\n" +
-                    "~~~~ Please wait 30 minutes before checking remaining live germs in sample ~~~\n" +
-                    "-------------------------------------------------------------------------------");
-
-                //follow up live germ sample
-                Console.WriteLine("\nPlease enter remaining live germs in sample");
-
-                float remGerms = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
-
-                //efficency rating
-                float efficRate = (liveGerm - remGerms) / 30;
-
-                sumEffic += efficRate;
-
-                Console.WriteLine($"\nThe efficency rating for {CHEMICALS[chosenChemicals[chosenChemicals.Count - 1]]} is {efficRate} \n");
-
-
-
-            }
-
-            float finalEfficRate = (float)Math.Round(sumEffic / 5, 2);
-
-
-            chemRating.Add(finalEfficRate);
-
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine($"\n The final efficency rating of {CHEMICALS[chosenChemicals[chosenChemicals.Count - 1]]} is {finalEfficRate}\n");
-            Console.WriteLine("-------------------------------------------------------------------------------");
-
-                
-            
-
-
-
-
-        }
-
-        static int CheckInt(string question, int min, int max)
-        {
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine(question);
-                    int user_choice = Convert.ToInt32(Console.ReadLine());
-
-
-
-                    if (user_choice >= min && user_choice <= max)
+                    if (chosenChemicals.Contains(chemChoice))
                     {
-                        return user_choice;
+                        Console.WriteLine("ERROR: chemical has already been tested");
+
                     }
                     else
                     {
-                        Console.WriteLine($"ERROR: Please enter a number between {min} and {max}\n");
+                        return chemChoice;
                     }
                 }
-                catch
+
+            }
+
+
+
+            //calculates the efficency of chemical
+
+            static void TestChemical()
+            {
+
+                chosenChemicals.Add(CheckChemical());
+
+                float sumEffic = 0;
+
+                for (int i = 1; i < 6; i++)
                 {
-                    Console.WriteLine($"ERROR: Please enter a number between {min} and {max}\n");
+
+                    //first live germ sample
+
+                    float liveGerm = CheckInt($"\nEnter amount of live germs in sample : Test {i}\n", 30, 300);
+                    
+                    Console.WriteLine("-------------------------------------------------------------------------------\n" +
+                        "~~~~ Please wait 30 minutes before checking remaining live germs in sample ~~~\n" +
+                        "-------------------------------------------------------------------------------");
+
+                    //follow up live germ sample
+                 
+                    float remGerms = CheckInt("\nPlease enter remaining live germs in sample", 0, 300);
+                    
+                    //efficency rating
+                    float efficRate = (liveGerm - remGerms) / 30;
+
+                    sumEffic += efficRate;
+
+                    Console.WriteLine($"\nThe efficency rating for {CHEMICALS[chosenChemicals[chosenChemicals.Count - 1] - 1]} is {efficRate} \n");
+
+
+
                 }
+
+                float finalEfficRate = (float)Math.Round(sumEffic / 5, 2);
+
+
+                chemRating.Add(finalEfficRate);
+
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine($"\n The final efficency rating of {CHEMICALS[chosenChemicals[chosenChemicals.Count - 1] - 1]} is {finalEfficRate}\n");
+                Console.WriteLine("-------------------------------------------------------------------------------");
+
+
+
 
 
 
 
             }
 
-        }
+            static int CheckInt(string question, int min, int max)
+            {
+                while (true)
+                {
+                    try
+                    {
+                        Console.WriteLine(question);
+                        int user_choice = Convert.ToInt32(Console.ReadLine());
+
+
+
+                        if (user_choice >= min && user_choice <= max)
+                        {
+                            return user_choice;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"ERROR: Please enter a number between {min} and {max}\n");
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine($"ERROR: Please enter a number between {min} and {max}\n");
+                    }
+
+
+
+
+                }
+
+            }
     }
 
 }
