@@ -27,19 +27,23 @@ namespace ChemicalTests
 
 
             //welcome message
-            Console.WriteLine("---------------------------------------------------------------\n" +
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------\n" +
                 "Welcome to chemical testing for HI - Jean Cleaning!\n" +
-                "You enter a sample of germs and each chemical.\n" +
-                "The tests will show an efficency rating for each sample you enter.\n" +
-                "---------------------------------------------------------------\n\n"
+                "Enter a sample of germs and choose a chemical.\n" +
+                "The tests will show an efficency rating for each chemical sample you enter.\n" +
+                "At the end of the program the system will generate and display lists of the worst and best chemicals tested.\n" +
+                "--------------------------------------------------------------------------------------------------------------\n\n"
                 );
 
             //test menu
             while (flag)
             {
-                menuPick = CheckInt("Menu: \n" +
+                menuPick = CheckInt(
+                    "~~~~~~~~~~~~~~\n"+
+                    "Menu: \n" +
                     "1. Continue\n" +
-                    "2. Stop", 1, 2);
+                    "2. Stop\n"+
+                    "~~~~~~~~~~~~~~\n", 1, 2);
                 if (menuPick == 1)
                 {
                     TestChemical();
@@ -173,7 +177,7 @@ namespace ChemicalTests
 
                     //first live germ sample
 
-                    float liveGerm = CheckInt($"\nEnter amount of live germs in sample : Test {i}\n", 30, 300);
+                    float liveGerm = CheckInt($"\nEnter amount of live germs in sample (30-300): Test {i}\n", 30, 300);
                     
                     Console.WriteLine("-------------------------------------------------------------------------------\n" +
                         "~~~~ Please wait 30 minutes before checking remaining live germs in sample ~~~\n" +
@@ -181,7 +185,7 @@ namespace ChemicalTests
 
                     //follow up live germ sample
                  
-                    float remGerms = CheckInt("\nPlease enter remaining live germs in sample", 0, 300);
+                    float remGerms = CheckInt("\nPlease enter remaining live germs in sample;", 0, 300);
                     
                     //efficency rating
                     float efficRate = (liveGerm - remGerms) / 30;
