@@ -106,7 +106,7 @@ namespace ChemicalTests
 
             Console.WriteLine(top3Chem);
 
-            //worst chems
+            //worst chems list
 
             string worst3Chem = "----- Worst Rated Chemicals -----\n";
 
@@ -135,6 +135,7 @@ namespace ChemicalTests
             //additonal methods
 
             //check to see chemical has not been tested before
+            //chemical choice
             static int CheckChemical()
             {
                 while (true)
@@ -147,7 +148,7 @@ namespace ChemicalTests
                        $"4. {CHEMICALS[3]}\n" +
                        $"5. {CHEMICALS[4]}\n", 1, 5);
 
-
+                    //error message for chosen chem
                     if (chosenChemicals.Contains(chemChoice))
                     {
                         Console.WriteLine("ERROR: chemical has already been tested");
@@ -197,7 +198,7 @@ namespace ChemicalTests
 
 
                 }
-
+                //final efficency rating
                 float finalEfficRate = (float)Math.Round(sumEffic / 5, 2);
 
 
@@ -214,7 +215,7 @@ namespace ChemicalTests
 
 
             }
-
+                //error messages
             static int CheckInt(string question, int min, int max)
             {
                 while (true)
