@@ -82,6 +82,7 @@ namespace ChemicalTests
                 }
             }
 
+      
             //Ordered List top chems
 
 
@@ -100,7 +101,7 @@ namespace ChemicalTests
 
             for(int chemIndex = 0; chemIndex < numLoop; chemIndex++)
             {
-                top3Chem+= chemIndex + 1 + "." + " " + CHEMICALS[chosenChemicals[chemIndex]] + "  " + chemRating[chemIndex] +"\n";
+                top3Chem+= chemIndex + 1 + "." + " " + CHEMICALS[chosenChemicals[chemIndex]-1] + "  " + chemRating[chemIndex] +"\n";
                 
             }
 
@@ -124,7 +125,7 @@ namespace ChemicalTests
 
             for (int loop = 0; loop < numbLoop; loop++)
             {
-                worst3Chem += worstChemIndex + 1 + "." + " " + CHEMICALS[chosenChemicals[worstChemIndex]] + "  " + chemRating[worstChemIndex] + "\n";
+                worst3Chem += worstChemIndex + 1 + "." + " " + CHEMICALS[chosenChemicals[worstChemIndex]-1] + "  " + chemRating[worstChemIndex] + "\n";
                 worstChemIndex--;
             }
             Console.WriteLine(worst3Chem);
